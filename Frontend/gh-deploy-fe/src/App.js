@@ -6,7 +6,7 @@ function App() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const response = fetch('https://ghapi.azurewebsites.net/weatherforecast')
+    fetch('https://ghapi.azurewebsites.net/weatherforecast')
       .then(res => res.json()).then(e => setData(e))
       .catch(err => {
         setError('An error occured. See console.');
