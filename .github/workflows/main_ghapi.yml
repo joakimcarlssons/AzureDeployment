@@ -102,5 +102,5 @@ jobs:
         with:
           app-name: 'ghapp'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_362176FE13CA494CACE583C3073F4F73 }}
           package: .
