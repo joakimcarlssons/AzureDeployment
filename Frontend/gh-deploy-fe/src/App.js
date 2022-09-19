@@ -14,25 +14,25 @@ function App() {
       })
   }, [])
 
-  return error ? (
+  return !error ? (
     <div className="App">
       <table>
         <thead>
-          <th>
-            <tr>Date</tr>
-            <tr>Temperature C</tr>
-            <tr>Temperature F</tr>
-            <tr>Summary</tr>
-          </th>
+          <tr>
+            <td>Date</td>
+            <td>Temperature C</td>
+            <td>Temperature F</td>
+            <td>Summary</td>
+          </tr>
         </thead>
         <tbody>
           {data?.map(d => {
-            return <td>
-              <tr>d.date</tr>
-              <tr>d.temperatureC</tr>
-              <tr>d.temperatureF</tr>
-              <tr>d.summary</tr>
-            </td>
+            return <tr>
+              <td>{d.date}</td>
+              <td>{d.temperatureC}</td>
+              <td>{d.temperatureF}</td>
+              <td>{d.summary}</td>
+            </tr>
           })}
         </tbody>
       </table>
