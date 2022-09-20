@@ -54,12 +54,15 @@ jobs:
         run: |
           npm install
           npm run build --if-present
+
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy_DOTNET:
     runs-on: windows-latest
@@ -95,6 +98,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+      
+      - name: Unzip Artifact for deployment
+        run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
