@@ -87,7 +87,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release.zip
-          path: release.zip
+          path: Frontend\gh-deploy-fe\release.zip
+          if-no-files-found: error
           
   deploy_NODE:
     runs-on: windows-latest
