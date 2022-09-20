@@ -78,14 +78,16 @@ jobs:
           npm run build --if-present
 
       - name: Zip artifact for deployment
+        run: Compress-Archive . release.zip
+
+      - name: List
         run: ls
-        #run: Compress-Archive . release.zip
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
-          path: build
+          name: release.zip
+          path: release.zip
           
   deploy_NODE:
     runs-on: windows-latest
@@ -98,10 +100,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: node-app
+          name: release.zip
       
-      # - name: Unzip Artifact for deployment
-      #   run: unzip release.zip
+      - name: Unzip Artifact for deployment
+        run: Expand-Archive release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
