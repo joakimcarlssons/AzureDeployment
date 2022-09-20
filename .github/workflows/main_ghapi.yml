@@ -100,11 +100,11 @@ jobs:
         with:
           name: react-app
       
-      - name: Unzip Artifact for deployment
-        run: Expand-Archive release.zip
+      # - name: Unzip Artifact for deployment
+      #   run: Expand-Archive release.zip
 
-      - name: List
-        run: ls
+      # - name: List
+      #   run: ls
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -113,4 +113,4 @@ jobs:
           app-name: 'ghapp'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A151D98BB51C412FB85DA62F4C5A732C }}
-          package: ./release
+          package: release.zip
