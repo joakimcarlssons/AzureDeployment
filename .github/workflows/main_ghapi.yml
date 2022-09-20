@@ -113,4 +113,4 @@ jobs:
           app-name: 'ghapp'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A151D98BB51C412FB85DA62F4C5A732C }}
-          package: .
+          package: ./release
