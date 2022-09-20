@@ -11,54 +11,54 @@ on:
 
 jobs:
 
-  # build_DOTNET:
-  #   runs-on: windows-latest
-  #   defaults:
-  #     run:
-  #       working-directory: Backend\AzureDeployment.API
+  build_DOTNET:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: Backend\AzureDeployment.API
     
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Set up .NET Core
-  #       uses: actions/setup-dotnet@v1
-  #       with:
-  #         dotnet-version: '6.0.x'
-  #         include-prerelease: true
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
 
-  #     - name: Build with dotnet
-  #       run: dotnet build --configuration Release
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
 
-  #     - name: dotnet publish
-  #       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-  #     - name: Upload artifact for deployment job
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: .net-app
-  #         path: ${{env.DOTNET_ROOT}}/myapp
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
   
-  # deploy_DOTNET:
-  #   runs-on: windows-latest
-  #   needs: build_DOTNET
-  #   environment:
-  #     name: 'Production'
-  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  deploy_DOTNET:
+    runs-on: windows-latest
+    needs: build_DOTNET
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-  #   steps:
-  #     - name: Download artifact from build job
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: .net-app
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
 
-  #     - name: Deploy to Azure Web App
-  #       id: deploy-to-webapp
-  #       uses: azure/webapps-deploy@v2
-  #       with:
-  #         app-name: 'ghapi'
-  #         slot-name: 'Production'
-  #         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_362176FE13CA494CACE583C3073F4F73 }}
-  #         package: .
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'ghapi'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_362176FE13CA494CACE583C3073F4F73 }}
+          package: .
 
   build_NODE:
     runs-on: windows-latest
@@ -76,9 +76,6 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-
-      # - name: Zip artifact for deployment
-      #   run: Compress-Archive ./build build.zip
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -99,9 +96,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: react-app
-      
-      # - name: Unzip Artifact for deployment
-      #   run: Expand-Archive release.zip
 
       - name: List
         run: ls
