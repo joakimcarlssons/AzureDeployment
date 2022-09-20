@@ -79,14 +79,11 @@ jobs:
 
       - name: Zip artifact for deployment
         run: Compress-Archive . release.zip
-
-      - name: List
-        run: ls
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: release.zip
+          name: react-app
           path: Frontend\gh-deploy-fe\release.zip
           if-no-files-found: error
           
@@ -101,7 +98,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: release.zip
+          name: react-app
+
+      - name: List
+        run: ls
       
       - name: Unzip Artifact for deployment
         run: Expand-Archive release.zip
