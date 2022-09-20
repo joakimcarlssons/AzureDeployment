@@ -98,6 +98,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+          path: release.zip
       
       - name: Unzip Artifact for deployment
         run: unzip release.zip
