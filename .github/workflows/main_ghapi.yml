@@ -100,11 +100,13 @@ jobs:
         with:
           name: react-app
       
-      # - name: Unzip Artifact for deployment
-      #   run: Expand-Archive release.zip
+      - name: Unzip Artifact for deployment
+        run: Expand-Archive release.zip
 
-      # - name: List
-      #   run: ls
+      - name: List
+        run: |
+          cd release
+          ls
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
