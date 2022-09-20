@@ -100,8 +100,8 @@ jobs:
         with:
           name: react-app
       
-      - name: Unzip Artifact for deployment
-        run: Expand-Archive release.zip
+      # - name: Unzip Artifact for deployment
+      #   run: Expand-Archive release.zip
 
       - name: List
         run: ls
